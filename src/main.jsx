@@ -205,7 +205,6 @@ function App(){
     <a href="/aviso-legal.html">Aviso legal</a>
     <a href="/privacidad.html">Privacidad</a>
     <a href="/cookies.html">Cookies</a>
-    <a href="/contacto.html">Contacto</a>
     <a href="/sobre-nosotros.html">Sobre nosotros</a>
   </div>
 </footer>
