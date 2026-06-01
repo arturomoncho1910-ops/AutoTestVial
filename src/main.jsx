@@ -198,7 +198,17 @@ function App(){
   {!selectedCat&&<div className="page">{groups.map(group=><section key={group} className="group"><h2>{group}</h2><div className="cards">{categories.filter(c=>c.group===group).map(cat=><button className="card" key={cat.id} onClick={()=>setSelectedCat(cat)}><span className="pill">{cat.id}</span><h3>{cat.title}</h3><p>{cat.desc}</p></button>)}</div></section>)}</div>}
   {selectedCat&&!selectedTest&&<div className="page"><button className="back" onClick={()=>setSelectedCat(null)}>← Volver</button><section className="panel"><div><p className="eyebrow">{selectedCat.group}</p><h2>{selectedCat.title}</h2></div><div className="counter">50 tests</div></section><div className="testGrid">{Array.from({length:50},(_,i)=>i+1).map(n=><button className="testButton" key={n} onClick={()=>openTest(n)}>Test {n}</button>)}</div></div>}
   {selectedCat&&selectedTest&&<div className="page testPage"><button className="back" onClick={()=>setSelectedTest(null)}>← Volver</button><section className="panel sticky"><div><p className="eyebrow">{selectedCat.title}</p><h2>Test {selectedTest}</h2><p>{Object.keys(answers).length}/{questions.length} respondidas</p></div><button className="primary" onClick={()=>setFinished(true)}>Corregir</button></section>{questions.map((q,i)=>{const exp=buildExplanation(q);return <article className="question" key={q.id}><div className="visual"><Scene scene={q.scene} sign={q.sign}/></div><div className="questionContent"><h3>{i+1}. {q.q}</h3><div className="options">{q.o.map((option,idx)=><button key={idx} className={`option ${answers[i]===idx?'chosen':''} ${finished&&idx===q.c?'ok':''} ${finished&&answers[i]===idx&&idx!==q.c?'bad':''}`} onClick={()=>setAnswers({...answers,[i]:idx})}>{option}</button>)}</div>{finished&&<div className={`explanation ${answers[i]===q.c ? 'correctExplanation' : 'wrongExplanation'}`}><strong>{answers[i]===q.c ? 'Correcta' : 'Fallada'}</strong><p>{exp.intro}</p><p>{exp.whyCorrect}</p><p>{exp.whyWrong1}</p><p>{exp.whyWrong2}</p></div>}</div></article>})}{finished&&<section className={`result ${passed ? 'passed' : 'failed'}`}><h2>{passed ? 'APROBADO' : 'SUSPENSO'}</h2><p>Resultado: {score}/{questions.length} · Fallos: {mistakes}</p><p>{passed ? 'Has cometido 3 fallos o menos.' : 'Has cometido más de 3 fallos. Revisa las explicaciones y repite otro test.'}</p><button className="primary light" onClick={()=>openTest(selectedTest===50?1:selectedTest+1)}>Siguiente test</button></section>}</div>}
-  <footer><strong>Aviso:</strong> web no oficial. Las preguntas son orientativas y originales.</footer>
+  <footer>
+  <strong>Aviso:</strong> web no oficial. Las preguntas son orientativas y originales.
+  
+  <div className="footerLinks">
+    <a href="/aviso-legal.html">Aviso legal</a>
+    <a href="/privacidad.html">Privacidad</a>
+    <a href="/cookies.html">Cookies</a>
+    <a href="/contacto.html">Contacto</a>
+    <a href="/sobre-nosotros.html">Sobre nosotros</a>
+  </div>
+</footer>
  </main>
 }
 createRoot(document.getElementById('root')).render(<App/>)
